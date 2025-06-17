@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import vv.monika.wavesoffood.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-    val binding : ActivityLoginBinding by lazy {
+   private val binding : ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {

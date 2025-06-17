@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import vv.monika.wavesoffood.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
-    val binding: ActivitySignupBinding by lazy {
+     private val binding: ActivitySignupBinding by lazy {
         ActivitySignupBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import vv.monika.wavesoffood.databinding.ActivityStartAppBinding
 
 class StartAppActivity : AppCompatActivity() {
-    val binding: ActivityStartAppBinding by lazy {
+   private val binding: ActivityStartAppBinding by lazy {
         ActivityStartAppBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
