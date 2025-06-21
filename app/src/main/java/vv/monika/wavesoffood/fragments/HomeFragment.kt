@@ -2,6 +2,7 @@ package vv.monika.wavesoffood.fragments
 
 import android.icu.text.Transliterator.Position
 import android.os.Bundle
+import android.os.TestLooperManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
+import vv.monika.wavesoffood.MenuBottomSheetFragment
 import vv.monika.wavesoffood.R
 import vv.monika.wavesoffood.adapter.PopularAdapter
 import vv.monika.wavesoffood.databinding.FragmentHomeBinding
@@ -31,6 +33,13 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
+
+        binding.viewAllMenuBtn.setOnClickListener {
+            val bottomSheetDialog = MenuBottomSheetFragment()
+            bottomSheetDialog.show(parentFragmentManager, "Test")
+        }
         return binding.root
 
 
@@ -50,6 +59,8 @@ class HomeFragment : Fragment() {
         imagesSlider.setImageList(imageList, ScaleTypes.FIT)
 
 //        select on click listener
+
+
 
         imagesSlider.setItemClickListener(object : ItemClickListener{
             override fun doubleClick(position: Int) {

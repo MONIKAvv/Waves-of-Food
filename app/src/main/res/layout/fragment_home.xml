@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/view_all_menu_btn" />
 
     <TextView
         android:id="@+id/textView16"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/view_all_menu_btn"
         android:layout_width="80dp"
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
