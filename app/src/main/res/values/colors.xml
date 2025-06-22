@@ -11,4 +11,7 @@
     <color name="textColor">#6ccb92</color>
     <color name="startColor">#52e78b</color>
     <color name="endColor">#069F59</color>
+    <color name="recentBuyColor">#4bff5d</color>
+    <color name="hintColor">#3B3B3B
+    </color>
 </resources>
