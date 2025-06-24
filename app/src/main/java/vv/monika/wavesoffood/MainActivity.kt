@@ -6,12 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import vv.monika.wavesoffood.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         // ✅ This is the correct way to get NavController from FragmentContainerView
         val navHostFragment = supportFragmentManager
@@ -21,5 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setupWithNavController(navController)
+
+        binding.notificationBell.setOnClickListener {
+            val bottomSheetDialog = NotificationBottomSheetFragment()
+            bottomSheetDialog.show(supportFragmentManager, "Test")
+        }
     }
 }
