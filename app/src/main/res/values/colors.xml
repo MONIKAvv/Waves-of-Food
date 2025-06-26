@@ -12,6 +12,8 @@
     <color name="startColor">#52e78b</color>
     <color name="endColor">#069F59</color>
     <color name="recentBuyColor">#4bff5d</color>
+    <color name="green_500">#B0CBB2</color>
+    <color name="green_700">#BAE4BD</color>
     <color name="hintColor">#3B3B3B
     </color>
 </resources>

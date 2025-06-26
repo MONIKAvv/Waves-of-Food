@@ -1,5 +1,6 @@
 package vv.monika.wavesoffood
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +18,10 @@ class PaymentActivity : AppCompatActivity() {
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       binding.notificationBackBtn.setOnClickListener {
-//           dismiss()
-
-       }
+        binding.placeOrderButton.setOnClickListener {
+         val bottomSheet = CongratsBottomSheet()
+            bottomSheet.show(supportFragmentManager, "congrats bottom sheet")
+        }
 
     }
 }
