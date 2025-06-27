@@ -36,7 +36,7 @@ private lateinit var buyAgainAdapter : BuyPreviousItemAgainAdapter
         val buyAgainFoodPrice = arrayListOf("$6", "$5", "$8", "$9")
         val buyAgainFoodImage = arrayListOf(R.drawable.menu1, R.drawable.menu3, R.drawable.menu7, R.drawable.menu4)
 
-        buyAgainAdapter = BuyPreviousItemAgainAdapter(buyAgainFoodName, buyAgainFoodPrice, buyAgainFoodImage)
+        buyAgainAdapter = BuyPreviousItemAgainAdapter(buyAgainFoodName, buyAgainFoodPrice, buyAgainFoodImage, requireContext())
         binding.buyAgainRecyclerView.adapter = buyAgainAdapter
         binding.buyAgainRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }

@@ -1,14 +1,18 @@
 package vv.monika.wavesoffood.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import vv.monika.wavesoffood.DetailedActivity
 import vv.monika.wavesoffood.databinding.CartItemBinding
 
 class CartAdapter(
     private val cartItems: MutableList<String>,
     private val cartItemPrice: MutableList<String>,
-    private val cartImage: MutableList<Int>
+    private val cartImage: MutableList<Int>,
+    private val requiredContext: Context
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private val itemQuantities = IntArray(cartItems.size){1}
 
@@ -53,6 +57,19 @@ class CartAdapter(
 
                 }
             }
+
+            binding.root.setOnClickListener {
+                val intent  = Intent(requiredContext, DetailedActivity::class.java)
+
+                intent.putExtra("FoodName", cartItems[position])
+                intent.putExtra("FoodImage", cartImage[position])
+                intent.putExtra("FoodPrice", cartItemPrice[position])
+
+                requiredContext.startActivity(intent)
+//                now need to fetch this on detailedActivity
+//                also need to update adapter in cardFragment
+            }
+
         }
 
         private fun decreaseQuantities(position: Int) {

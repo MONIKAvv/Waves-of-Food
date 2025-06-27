@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import vv.monika.wavesoffood.DetailedActivity
 import vv.monika.wavesoffood.PaymentActivity
 import vv.monika.wavesoffood.R
 import vv.monika.wavesoffood.adapter.CartAdapter
@@ -34,11 +35,17 @@ class CartFragment : Fragment() {
             R.drawable.menu1, R.drawable.menu2,R.drawable.menu3, R.drawable.menu5, R.drawable.menu4, R.drawable.menu6,
             R.drawable.menu7
         )
-        val adapter = CartAdapter(ArrayList(cartFoodName), ArrayList(cartFoodPrice),ArrayList(cartFoodImage))
+        val adapter = CartAdapter(ArrayList(cartFoodName), ArrayList(cartFoodPrice),ArrayList(cartFoodImage), requireContext())
         binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRecyclerView.adapter = adapter
 
         proceedToBuy()
+
+        binding.root.setOnClickListener {
+            val intent = Intent(requireContext(), DetailedActivity::class.java)
+            startActivity(intent)
+
+        }
 
         return binding.root
     }
