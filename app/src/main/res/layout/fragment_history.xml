@@ -89,14 +89,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView5"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="32dp"
-                app:cardBackgroundColor="@color/recentBuyColor"
+                android:backgroundTint="@color/recentBuyColor"
                 app:cardCornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/buyAgainFoodButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buyAgainFoodButton"
+                android:layout_width="65dp"
+                android:layout_height="20dp"
+                android:background="@drawable/add_to_cart_shape"
+                android:fontFamily="@font/yeon_sung"
+                android:text="Recived"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/cardView5"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toStartOf="@+id/cardView5"
+                app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
