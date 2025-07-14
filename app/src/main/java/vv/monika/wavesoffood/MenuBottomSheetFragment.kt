@@ -11,6 +11,10 @@ import vv.monika.wavesoffood.databinding.FragmentMenuBottomSheetBinding
 
 
 class MenuBottomSheetFragment : BottomSheetDialogFragment() {
+//    we want that when user click on view popular , the things that we have added into our backend from admin will display here
+
+
+
     private lateinit var binding: FragmentMenuBottomSheetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

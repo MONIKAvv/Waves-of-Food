@@ -87,5 +87,6 @@ dependencies {
 //google signin Client dependency
     implementation ("com.google.android.gms:play-services-auth:21.0.0")
 
-
+//glide for image upload
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }
