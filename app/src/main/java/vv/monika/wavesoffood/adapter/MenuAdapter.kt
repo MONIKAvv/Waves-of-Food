@@ -47,7 +47,7 @@ class MenuAdapter(
                 menuFoodPrice.text = menuItem.foodPrice
 //                menuFoodImage.setImageResource(menuItemImage[position])
 //we want to use glide to upload image
-                val uri = Uri.parse(menuItem.foodImageUrl)
+                val uri = Uri.parse(menuItem.foodImage)
                 Glide.with(requiredContext).load(uri).into(menuFoodImage)
 
             }
