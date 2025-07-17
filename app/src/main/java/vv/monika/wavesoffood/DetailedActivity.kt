@@ -66,7 +66,7 @@ class DetailedActivity : AppCompatActivity() {
                 foodImage.toString(), foodQuantity = 1)
 
 //            save to the user ref to the firebase
-            database.child("user").child(userId).child("CartItem").push().setValue(cartItem).addOnSuccessListener {
+            database.child("user").child(userId).child("CartItems").push().setValue(cartItem).addOnSuccessListener {
                 Toast.makeText(this, "Food Added to Cart! 😎", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(this, "Not added to cart 😣", Toast.LENGTH_SHORT).show()

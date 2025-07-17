@@ -46,7 +46,7 @@ class CartAdapter(
         private lateinit var cartItemReference: DatabaseReference
     }
 
-    private var itemQuantities = IntArray(cartItems.size) { 1 }
+//    private var itemQuantities = IntArray(cartItems.size) { 1 }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val binding = CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

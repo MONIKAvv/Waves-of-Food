@@ -52,26 +52,27 @@ class CartFragment : Fragment() {
 
 
 //        dummy data
-        val cartFoodName =
-            listOf("Burger", "sandwich", "momo", "chat", "chawmin", "sandwich", "momo")
-        val cartFoodPrice = listOf("$5", "$7", "$7", "$3", "$9", "$3", "$5")
-        val cartFoodImage = listOf(
-            R.drawable.menu1,
-            R.drawable.menu2,
-            R.drawable.menu3,
-            R.drawable.menu5,
-            R.drawable.menu4,
-            R.drawable.menu6,
-            R.drawable.menu7
-        )
-        val adapter = CartAdapter(
-            ArrayList(cartFoodName),
-            ArrayList(cartFoodPrice),
-            ArrayList(cartFoodImage),
-            requireContext()
-        )
-        binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.cartRecyclerView.adapter = adapter
+//        val cartFoodName =
+//            listOf("Burger", "sandwich", "momo", "chat", "chawmin", "sandwich", "momo")
+//        val cartFoodPrice = listOf("$5", "$7", "$7", "$3", "$9", "$3", "$5")
+//        val cartFoodImage = listOf(
+//            R.drawable.menu1,
+//            R.drawable.menu2,
+//            R.drawable.menu3,
+//            R.drawable.menu5,
+//            R.drawable.menu4,
+//            R.drawable.menu6,
+//            R.drawable.menu7
+//        )
+//        val adapter = CartAdapter(
+//            ArrayList(cartFoodName),
+//            ArrayList(cartFoodPrice),
+//            ArrayList(cartFoodImage),
+//            requireContext(),
+//            cartDescription: ArrayList(ca)
+//        )
+//        binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        binding.cartRecyclerView.adapter = adapter
 
         proceedToBuy()
 
@@ -104,7 +105,7 @@ class CartFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (foodSnapshot in snapshot.children) {
                     //                    get cartitem object from child node
-            val cartItems = foodSnapshot.getValue(CartItemModel::class.java)
+                    val cartItems = foodSnapshot.getValue(CartItemModel::class.java)
 //add cart items details to the list
                     cartItems?.adapterFoodName?.let { foodName.add(it) }
                     cartItems?.adapterFoodPrice?.let { foodPrice.add(it) }
@@ -120,10 +121,14 @@ class CartFragment : Fragment() {
             }
 
             private fun cartAdapter() {
-                val adapter = CartAdapter(foodName, foodPrice, foodImageUri, requireContext(),foodDescription,
-                    quantity, foodIngredient)
-                binding.cartRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
-                    LinearLayoutManager.VERTICAL, false)
+                val adapter = CartAdapter(
+                    foodName, foodPrice, foodImageUri, requireContext(), foodDescription,
+                    quantity, foodIngredient
+                )
+                binding.cartRecyclerView.layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL, false
+                )
                 binding.cartRecyclerView.adapter = adapter
             }
 
