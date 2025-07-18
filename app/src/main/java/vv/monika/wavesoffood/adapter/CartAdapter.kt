@@ -62,6 +62,15 @@ class CartAdapter(
         return cartItems.size
     }
 
+    //    function from cartFragment , get updated quantities
+    fun getUpdatedItemsQuantities(): MutableList<Int>
+    {
+    val itemQuantity = mutableListOf<Int>()
+        itemQuantity.addAll(cartQuantity)
+        return itemQuantity
+
+    }
+
     inner class CartViewHolder(private val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
@@ -141,8 +150,8 @@ class CartAdapter(
             }
         }
 
-        private fun removeItem(position: Int, uniqueKey: String){
-            if (uniqueKey != null){
+        private fun removeItem(position: Int, uniqueKey: String) {
+            if (uniqueKey != null) {
                 cartItemReference.child(uniqueKey).removeValue().addOnSuccessListener {
                     cartItems.removeAt(position)
                     cartImage.removeAt(position)
@@ -150,11 +159,13 @@ class CartAdapter(
                     cartItemPrice.removeAt(position)
                     cartQuantity.removeAt(position)
                     cartIngredient.removeAt(position)
-                    Toast.makeText(requiredContext, "deleted successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requiredContext, "deleted successfully", Toast.LENGTH_SHORT)
+                        .show()
 //                    update item quantity
-                    itemQuantities = itemQuantities.filterIndexed { index, i -> index != position }.toIntArray()
+                    itemQuantities =
+                        itemQuantities.filterIndexed { index, i -> index != position }.toIntArray()
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position,cartItems.size)
+                    notifyItemRangeChanged(position, cartItems.size)
                 }.addOnFailureListener {
                     Toast.makeText(requiredContext, "Failed to Delete", Toast.LENGTH_SHORT).show()
                 }
@@ -163,7 +174,7 @@ class CartAdapter(
 
         private fun getUniqueKeyIdPosition(
             positionRetrieve: kotlin.Int,
-            onComplete:(String?) -> Unit
+            onComplete: (String?) -> Unit
         ) {
             cartItemReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -188,6 +199,7 @@ class CartAdapter(
             })
         }
     }
+
 
 }
 

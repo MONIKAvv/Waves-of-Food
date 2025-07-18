@@ -107,12 +107,12 @@ class CartFragment : Fragment() {
                     //                    get cartitem object from child node
                     val cartItems = foodSnapshot.getValue(CartItemModel::class.java)
 //add cart items details to the list
-                    cartItems?.adapterFoodName?.let { foodName.add(it) }
-                    cartItems?.adapterFoodPrice?.let { foodPrice.add(it) }
-                    cartItems?.adapterFoodDescription?.let { foodDescription.add(it) }
+                    cartItems?.modelFoodName?.let { foodName.add(it) }
+                    cartItems?.modelFoodPrice?.let { foodPrice.add(it) }
+                    cartItems?.modelFoodDescription?.let { foodDescription.add(it) }
                     cartItems?.foodImage?.let { foodImageUri.add(it) }
                     cartItems?.foodQuantity?.let { quantity.add(it) }
-                    cartItems?.adapterFoodIngredient?.let { foodIngredient.add(it) }
+                    cartItems?.modelFoodIngredient?.let { foodIngredient.add(it) }
 
                 }
 
@@ -121,7 +121,7 @@ class CartFragment : Fragment() {
             }
 
             private fun cartAdapter() {
-                val adapter = CartAdapter(
+               cartAdapter = CartAdapter(
                     foodName, foodPrice, foodImageUri, requireContext(), foodDescription,
                     quantity, foodIngredient
                 )
@@ -129,7 +129,7 @@ class CartFragment : Fragment() {
                     requireContext(),
                     LinearLayoutManager.VERTICAL, false
                 )
-                binding.cartRecyclerView.adapter = adapter
+                binding.cartRecyclerView.adapter = cartAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -141,9 +141,74 @@ class CartFragment : Fragment() {
     }
 
     private fun proceedToBuy() {
+//        get order items details before proceed to checkout
+        getOrderItemsDetails()
         binding.proceedButton.setOnClickListener {
             startActivity(Intent(requireContext(), PaymentActivity::class.java))
         }
+    }
+
+    private fun getOrderItemsDetails() {
+//        we need reference
+        val orderIdReference: DatabaseReference =
+            database.reference.child("user").child(userId).child("CartItems")
+        val foodName: MutableList<String> = mutableListOf<String>()
+        val foodPrice: MutableList<String> = mutableListOf<String>()
+        val foodDescription: MutableList<String> = mutableListOf<String>()
+        val foodImages: MutableList<String> = mutableListOf<String>()
+        val foodIngredient: MutableList<String> = mutableListOf<String>()
+//        get item quantity
+        val foodQuantities: MutableList<Int> = CartAdapter.getUpdatedItemsQuantities()
+        orderIdReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodSnapshot in snapshot.children) {
+//                get items to respective List
+                    val orderItems = foodSnapshot.getValue(CartItemModel::class.java)
+//                add items details to list
+                    orderItems?.modelFoodName?.let { foodName.add(it) }
+                    orderItems?.modelFoodPrice?.let { foodPrice.add(it) }
+                    orderItems?.modelFoodDescription?.let { foodDescription.add(it) }
+                    orderItems?.modelFoodIngredient?.let { foodIngredient.add(it) }
+                    orderItems?.foodImage?.let { foodImages.add(it) }
+                }
+//                we create our order
+                orderNow(
+                    foodName,
+                    foodPrice,
+                    foodDescription,
+                    foodImages,
+                    foodIngredient,
+                    foodQuantities
+                )
+            }
+
+            private fun orderNow(
+                foodName: MutableList<String>,
+                foodPrice: MutableList<String>,
+                foodDescription: MutableList<String>,
+                foodImages: MutableList<String>,
+                foodIngredient: MutableList<String>,
+                foodQuantities: MutableList<Int>
+            ) {
+//                store all the details and send to payment activity
+                if (isAdded && context != null) {
+                    val intent = Intent(requireContext(), PaymentActivity::class.java)
+                    intent.putExtra("FoodItemName", foodName as ArrayList<String>)
+                    intent.putExtra("FoodItemPrice", foodPrice as ArrayList<String>)
+                    intent.putExtra("FoodItemDescription", foodDescription as ArrayList<String>)
+                    intent.putExtra("FoodItemImages", foodImages as ArrayList<String>)
+                    intent.putExtra("FoodItemIngredient", foodIngredient as ArrayList<String>)
+                    intent.putExtra("FoodItemQuantities", foodQuantities as ArrayList<Int>)
+                    startActivity(intent)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Order failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
     companion object {
